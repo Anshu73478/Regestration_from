@@ -1,0 +1,86 @@
+﻿@page
+@model WebFormCRUD.Pages.IndexModel
+@{
+    ViewData["Title"] = "Registration Form";
+}
+
+<div class="container">
+    <h2>Registration Form</h2>
+
+    <!-- Validation Summary -->
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="validation-summary">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form method="post">
+        <div>
+            <label for="Name">Name:</label>
+            <input type="text" id="Name" name="Name" required />
+        </div>
+        <div>
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" required />
+        </div>
+        <div>
+            <label for="Age">Age:</label>
+            <input type="number" id="Age" name="Age" required />
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Search Functionality -->
+    <h2>Search Users</h2>
+    <form method="get">
+        <div>
+            <label for="SearchName">Name:</label>
+            <input type="text" id="SearchName" name="SearchName" value="@Model.SearchName" />
+        </div>
+        <div>
+            <label for="SearchEmail">Email:</label>
+            <input type="text" id="SearchEmail" name="SearchEmail" value="@Model.SearchEmail" />
+        </div>
+        <div>
+            <label for="SearchAge">Age:</label>
+            <input type="number" id="SearchAge" name="SearchAge" value="@Model.SearchAge" />
+        </div>
+        <button type="submit">Search</button>
+    </form>
+
+    <!-- Users List -->
+    <h2>Users List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in Model.Users)
+            {
+                <tr>
+                    <td>@user.Id</td>
+                    <td>@user.Name</td>
+                    <td>@user.Email</td>
+                    <td>@user.Age</td>
+                    <td>
+                        <a href="/Edit/@user.Id">Edit</a>
+                        <a href="/Delete/@user.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

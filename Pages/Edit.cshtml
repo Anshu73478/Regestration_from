@@ -1,0 +1,24 @@
+@page "{id:int}"
+@model WebFormCRUD.Pages.EditModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h2>Edit User</h2>
+
+<form method="post">
+    <div>
+        <label for="Name">Name:</label>
+        <input type="text" id="Name" name="Name" value="@Model.User.Name" required />
+    </div>
+    <div>
+        <label for="Email">Email:</label>
+        <input type="email" id="Email" name="Email" value="@Model.User.Email" required />
+    </div>
+    <div>
+        <label for="Age">Age:</label>
+        <input type="number" id="Age" name="Age" value="@Model.User.Age" required />
+    </div>
+    <button type="submit">Save</button>
+    <a href="/">Cancel</a>
+</form>
